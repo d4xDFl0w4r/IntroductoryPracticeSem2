@@ -38,6 +38,9 @@ else()
     else()
         add_executable(IntroductoryPracticeSem2
             ${PROJECT_SOURCES}
+            tablerow.h tablerow.cpp
+            date.h date.cpp
+            table.h table.cpp
         )
     endif()
 endif()

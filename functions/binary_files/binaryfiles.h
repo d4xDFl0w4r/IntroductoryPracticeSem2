@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <vector>
-#include "../classes/tablerow.h"
+#include "../../classes/table_row/tablerow.h"
 
 void ReadFromBinaryFile(std::string filename, std::vector<TableRow>& table);
 void WriteToBinaryFile(std::string filename, std::vector<TableRow>& table);

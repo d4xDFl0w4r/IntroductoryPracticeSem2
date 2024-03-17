@@ -1,5 +1,5 @@
 #include "tablerow.h"
-#include "../functions/correctinput.h"
+#include "../../functions/correct_input/correctinput.h"
 
 TableRow::TableRow() {
     animalType = "none";

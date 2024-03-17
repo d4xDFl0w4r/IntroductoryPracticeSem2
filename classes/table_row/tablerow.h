@@ -2,7 +2,7 @@
 #define TABLEROW_H
 
 #include <string>
-#include "date.h"
+#include "../date/date.h"
 
 class TableRow
 {

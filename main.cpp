@@ -2,11 +2,11 @@
 #include <vector>
 #include <locale>
 
-#include "classes/date.h"
-#include "classes/tablerow.h"
+#include "classes/date/date.h"
+#include "classes/table_row/tablerow.h"
 
-#include "functions/others.h"
-#include "functions/binaryfiles.h"
+#include "functions/others/others.h"
+#include "functions/binary_files/binaryfiles.h"
 
 using namespace std;
 
@@ -17,7 +17,12 @@ int main(int argc, char *argv[])
     table.push_back(TableRow());
     table.push_back(TableRow());
     table.push_back(TableRow());
-    //ReadFromBinaryFile("test.bin", table);
-    outputData(table);
+    table.push_back(TableRow());
+    table.push_back(TableRow());
+    table.push_back(TableRow());
+    table.push_back(TableRow());
+    table.push_back(TableRow());
+    table.push_back(TableRow());
+    printTable(table, 20);
     return 0;
 }

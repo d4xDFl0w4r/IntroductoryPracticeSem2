@@ -49,7 +49,10 @@ void Date::setYear(unsigned int newYear) {
 }
 
 std::string Date::GetDateAsString() {
-    return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
+    return 
+        ((day < 10) ? ("0" + std::to_string(day)) : (std::to_string(day))) + "." +
+        ((month < 10) ? ("0" + std::to_string(month)) : (std::to_string(month))) + "." +
+        std::to_string(year);
 }
 
 int Date::CompareDates(Date* firstDate, Date* secondDate) {

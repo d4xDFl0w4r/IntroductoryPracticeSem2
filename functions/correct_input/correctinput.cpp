@@ -2,7 +2,7 @@
 
 bool isCorrectString(const std::string &str) {
     for (char character : str) {
-        if (!isalpha(character)) {
+        if (!isalpha(character) && character != ' ') {
             return 0;
         }
     }
@@ -11,7 +11,7 @@ bool isCorrectString(const std::string &str) {
 
 bool isCorrectStringWithNumbers(const std::string &str) {
     for (char character : str) {
-        if (!isalnum(character)) {
+        if (!isalnum(character)  && character != ' ') {
             return 0;
         }
     }

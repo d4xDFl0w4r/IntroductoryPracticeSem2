@@ -20,7 +20,7 @@ std::string TableRow::getAnimalType() const {
 }
 
 void TableRow::setAnimalType(const std::string &newAnimalType) {
-    if (isCorrectString(newAnimalType)) {
+    if (!isCorrectString(newAnimalType)) {
         return;
     }
     animalType = newAnimalType;
@@ -31,7 +31,7 @@ std::string TableRow::getAnimalBreed() const {
 }
 
 void TableRow::setAnimalBreed(const std::string &newAnimalBreed) {
-    if (isCorrectString(newAnimalBreed)) {
+    if (!isCorrectString(newAnimalBreed)) {
         return;
     }
     animalBreed = newAnimalBreed;
@@ -42,7 +42,7 @@ std::string TableRow::getAnimalSex() const {
 }
 
 void TableRow::setAnimalSex(const std::string &newAnimalSex) {
-    if (isCorrectString(newAnimalSex)) {
+    if (!isCorrectString(newAnimalSex)) {
         return;
     }
     animalSex = newAnimalSex;
@@ -53,7 +53,7 @@ std::string TableRow::getAnimalName() const {
 }
 
 void TableRow::setAnimalName(const std::string &newAnimalName) {
-    if (isCorrectStringWithNumbers(newAnimalName)) {
+    if (!isCorrectStringWithNumbers(newAnimalName)) {
         return;
     }
     animalName = newAnimalName;
@@ -64,7 +64,7 @@ std::string TableRow::getComment() const {
 }
 
 void TableRow::setComment(const std::string &newComment) {
-    if (isCorrectStringWithNumbers(newComment)) {
+    if (!isCorrectStringWithNumbers(newComment)) {
         return;
     }
     comment = newComment;
@@ -75,43 +75,43 @@ std::string TableRow::getOwner() const {
 }
 
 void TableRow::setOwner(const std::string &newOwner) {
-    if (isCorrectString(newOwner)) {
+    if (!isCorrectString(newOwner)) {
         return;
     }
     owner = newOwner;
 }
 
 std::string TableRow::getDepartment() const {
-    return comment;
+    return department;
 }
 
 void TableRow::setDepartment(const std::string &newDepartment) {
-    if (isCorrectStringWithNumbers(newDepartment)) {
+    if (!isCorrectStringWithNumbers(newDepartment)) {
         return;
     }
-    comment = newDepartment;
+    department = newDepartment;
 }
 
 std::string TableRow::getServiceType() const {
-    return comment;
+    return serviceType;
 }
 
 void TableRow::setServiceType(const std::string &newServiceType) {
-    if (isCorrectString(newServiceType)) {
+    if (!isCorrectString(newServiceType)) {
         return;
     }
-    comment = newServiceType;
+    serviceType = newServiceType;
 }
 
 std::string TableRow::getServicePrice() const {
-    return comment;
+    return servicePrice;
 }
 
 void TableRow::setServicePrice(const std::string &newServicePrice) {
-    if (isCorrectStringWithNumbers(newServicePrice)) {
+    if (!isCorrectStringWithNumbers(newServicePrice)) {
         return;
     }
-    comment = newServicePrice;
+    servicePrice = newServicePrice;
 }
 
 Date TableRow::getDateOfReceipt() const {
@@ -120,7 +120,7 @@ Date TableRow::getDateOfReceipt() const {
 
 void TableRow::setDateOfReceipt(const unsigned int &newDay, const unsigned int &newMonth, const unsigned int &newYear) {
     dateOfReceipt.setDay(newDay);
-    dateOfReceipt.setYear(newMonth);
+    dateOfReceipt.setMonth(newMonth);
     dateOfReceipt.setYear(newYear);
 }
 
@@ -130,6 +130,6 @@ Date TableRow::getDateOfDischarge() const {
 
 void TableRow::setDateOfDischarge(const unsigned int &newDay, const unsigned int &newMonth, const unsigned int &newYear) {
     dateOfDischarge.setDay(newDay);
-    dateOfDischarge.setYear(newMonth);
+    dateOfDischarge.setMonth(newMonth);
     dateOfDischarge.setYear(newYear);
 }

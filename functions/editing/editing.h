@@ -7,8 +7,10 @@
 #include <vector>
 
 #include "../../classes/table_row/tablerow.h"
+#include "../../errors/errors.h"
 
 std::string getString(std::string coutText);
+Date getDate(std::string coutText);
 void addRecord(std::vector<TableRow>& table);
 void editRecord(std::vector<TableRow>& table);
 

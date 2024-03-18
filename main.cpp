@@ -7,6 +7,8 @@
 
 #include "functions/others/others.h"
 #include "functions/editing/editing.h"
+#include "functions/sorting/sorting.h"
+#include "functions/search/search.h"
 #include "functions/binary_files/binaryfiles.h"
 
 #include "classes/Menu/menu/menu.h"
@@ -40,12 +42,12 @@ int itemEditRecords() {
 }
 
 int itemSortTable() {
-    cout << "Function in development" << endl;
+    sortTable(table);
     return 4;
 }
 
 int itemSearch() {
-    cout << "Function in development" << endl;
+    searchRecord(table, maxWidth);
     return 5;
 }
 

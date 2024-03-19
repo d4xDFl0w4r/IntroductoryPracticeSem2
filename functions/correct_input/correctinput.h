@@ -6,6 +6,6 @@
 
 bool isCorrectString(const std::string &str);
 bool isCorrectStringWithNumbers(const std::string &str);
-size_t length(std::string str);
+bool isCorrectNumber(const std::string &str);
 
 #endif //CORRECTINPUT_H

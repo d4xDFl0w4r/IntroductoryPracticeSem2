@@ -1,5 +1,4 @@
-#include "search.h" 
-#include "date.h" 
+#include "search.h"
  
 void searchRecord(std::vector<TableRow>& table, size_t maxWitdth) { 
     if (!table.size()) { 
@@ -68,10 +67,12 @@ void searchRecord(std::vector<TableRow>& table, size_t maxWitdth) {
         dateOfReceipt->setMonth(tempInt); 
         std::cout << "Day: "; 
         std::cin >> tempInt; 
-        dateOfReceipt->setDay(tempInt); 
+        dateOfReceipt->setDay(tempInt);
  
         for (int i = 0; i < table.size(); i++) { 
-            if (Date::CompareDates(dateOfReceipt, &table[i].getDateOfReceipt()) == 0) { 
+            Date* ptrDate = new Date();
+            *ptrDate = table[i].getDateOfReceipt();
+            if (Date::CompareDates(dateOfReceipt, ptrDate) == 0) { 
                 buffTable.push_back(table[i]);
             } 
         } 

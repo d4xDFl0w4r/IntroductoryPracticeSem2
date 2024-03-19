@@ -18,10 +18,11 @@ bool isCorrectStringWithNumbers(const std::string &str) {
     return 1;
 }
 
-size_t length(std::wstring str) {
-    size_t i = 0;
+bool isCorrectNumber(const std::string &str) {
     for (char character : str) {
-        i++;
+        if (!isdigit(character)) {
+            return 0;
+        }
     }
-    return i;
+    return 1;
 }

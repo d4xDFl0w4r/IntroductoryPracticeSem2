@@ -123,6 +123,11 @@ void TableRow::setDateOfReceipt(const unsigned int &newDay, const unsigned int &
     dateOfReceipt.setMonth(newMonth);
     dateOfReceipt.setYear(newYear);
 }
+void TableRow::setDateOfReceipt(Date &newDate) {
+    dateOfReceipt.setDay(newDate.getDay());
+    dateOfReceipt.setMonth(newDate.getMonth());
+    dateOfReceipt.setYear(newDate.getYear());
+}
 
 Date TableRow::getDateOfDischarge() const {
     return dateOfDischarge;
@@ -132,4 +137,9 @@ void TableRow::setDateOfDischarge(const unsigned int &newDay, const unsigned int
     dateOfDischarge.setDay(newDay);
     dateOfDischarge.setMonth(newMonth);
     dateOfDischarge.setYear(newYear);
+}
+void TableRow::setDateOfDischarge(Date &newDate) {
+    dateOfDischarge.setDay(newDate.getDay());
+    dateOfDischarge.setMonth(newDate.getMonth());
+    dateOfDischarge.setYear(newDate.getYear());
 }

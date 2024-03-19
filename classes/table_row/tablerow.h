@@ -39,9 +39,11 @@ public:
 
     Date getDateOfReceipt() const;
     void setDateOfReceipt(const unsigned int &newDay, const unsigned int &newMonth, const unsigned int &newYear);
+    void setDateOfReceipt(Date &newDate);
 
     Date getDateOfDischarge() const;
     void setDateOfDischarge(const unsigned int &newDay, const unsigned int &newMonth, const unsigned int &newYear);
+    void setDateOfDischarge(Date &newDate);
 
 private:
     std::string animalType;

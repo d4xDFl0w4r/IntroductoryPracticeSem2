@@ -2,7 +2,9 @@
 #define SEARCH_H 
  
 #include <iostream> 
-#include <vector> 
+#include <vector>
+
+#include "../../classes/date/date.h" 
  
 #include "../../classes/table_row/tablerow.h"
 #include "../others/others.h"

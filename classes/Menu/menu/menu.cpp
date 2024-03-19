@@ -30,12 +30,13 @@ void Menu::print() {
 
 int Menu::runCommand() {
     print();
-    std::cout << "\tSelect >> ";
     for (;;) {
-        std::cin >> select;
+        select = getInt(getString("\tSelect"));
         std::cout << std::endl;
-        if (select < 1 || select > numberOfFunctions) {
-            cout << "Number must be in range [1;" << numberOfFunctions <<"]" << endl;
+        if (select == -1) {
+            //pass
+        } else if (select < 1 || select > numberOfFunctions) {
+            throwRangeException("Select", 1, numberOfFunctions);
         } else {
             return items[select - 1].run();
         }

@@ -52,7 +52,12 @@ int itemSearch() {
 }
 
 int itemOpenTable() {
-    ReadFromBinaryFile(".data_files/data.bin", table);
+    try {
+        ReadFromBinaryFile(".data_files/data.bin", table);
+    }
+    catch (std::bad_alloc) {
+        throwBadAllocException();
+    }
     return 6;
 }
 

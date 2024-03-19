@@ -5,6 +5,8 @@
 #include <string>
 
 #include "../menu_item/menuitem.h"
+#include "../../../functions/editing/editing.h"
+#include "../../../errors/errors.h"
 
 using namespace std;
 

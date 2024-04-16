@@ -5,8 +5,6 @@
 #include "searchFieldDialog.h"
 #include "createChartDialog.h"
 #include "editFieldDialog.h"
-#include <QFile>
-#include <QDataStream>
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -24,7 +22,6 @@ Widget::Widget(QWidget *parent)
           << "Оказываемая услуга" << "Стоимость услуги"
           << "Дата поступления" << "Дата выписки";
     ui->tableWidget->setHorizontalHeaderLabels(title);
-    ui->tableWidget->resizeColumnsToContents();
 }
 
 Widget::~Widget()
@@ -83,99 +80,32 @@ void Widget::on_addRecord_clicked()
     ui->tableWidget->setItem(lastRow, COST, new QTableWidgetItem(QString::number(cost)));
     ui->tableWidget->setItem(lastRow, RECEIPT, new QTableWidgetItem(receipt));
     ui->tableWidget->setItem(lastRow, DISCHARGE, new QTableWidgetItem(discharge));
-
-    ui->tableWidget->resizeColumnsToContents();
 }
 
-void WriteString(QDataStream& fout, QString str) {
-    fout << str;
-}
-
-QString ReadString(QDataStream& fin) {
-    QString buffstr;
-    fin >> buffstr;
-    return buffstr;
-}
 
 void Widget::on_openFile_clicked()
 {
-    QString filename{};
+    QString fileName{};
 
-    filename = QFileDialog::getOpenFileName
-            (
-                this,
-                tr("Открыть файл"),
-                "/home/d4xdfl0w4r/Документы/VetClinicData",
-                "Бинарные файлы (*.bin)"
-            );
-
-    QFile file(filename);
-    file.open(QFile::ReadOnly);
-    if (file.NotOpen)
-    {
-        QMessageBox::critical(this, tr("Ошибка открытия файла"), ("Файл " + filename.toStdString() + " не удалось открыть").c_str());
-        return;
-    }
-
-    if (file.atEnd())
-    {
-        QMessageBox::warning
-                (
-                    this,
-                    tr("Предупреждение"),
-                    ("Файл " + filename.toStdString() + " пустой, ничего не записалось в таблицу").c_str()
-                );
-    }
-
-    ui->tableWidget->setRowCount(0);
-
-    QDataStream fin(&file);
-
-    for (int row = 0; !fin.atEnd(); row++)
-    {
-        ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-        for (int column = 0; column < ui->tableWidget->columnCount(); column++)
-        {
-            ui->tableWidget->setItem(row, column, new QTableWidgetItem(ReadString(fin)));
-        }
-    }
-
-    file.close();
-
-    ui->tableWidget->resizeColumnsToContents();
+    fileName = QFileDialog::getOpenFileName(this,
+                       tr("Открыть файл"), "C://", "Все файлы (*.*)");
+    QMessageBox::information(this, tr("Имя файла"), fileName);//Вместо этого код открытия файла
 }
 
 
 void Widget::on_saveFile_clicked()
 {
-    QString filename{};
+    QString fileName{};
 
-    filename = QFileDialog::getOpenFileName(this,
-                       tr("Сохранить файл"), "/home/d4xdfl0w4r/Документы/VetClinicData", "Бинарные файлы (*.bin)");
-
-    QFile file(filename);
-    file.open(QFile::WriteOnly);
-    if (file.NotOpen) {
-        QMessageBox::information(this, tr("Ошибка открытия файла"), ("Файл " + filename.toStdString() + " не удалось открыть").c_str());
-        return;
-    }
-
-    QDataStream fout(&file);
-
-    for (int row = 0; row < ui->tableWidget->rowCount(); row++)
-    {
-        for (int column = 0; column < ui->tableWidget->columnCount(); column++)
-        {
-            WriteString(fout, ui->tableWidget->item(row, column)->text());
-        }
-    }
-
-    file.close();
+    fileName = QFileDialog::getOpenFileName(this,
+                       tr("Сохранить файл"), "C://", "Все файлы (*.*)");
+    QMessageBox::information(this, tr("Имя файла"), fileName);//Вместо этого код сохранения файла
 }
 
 
 void Widget::on_sortTable_clicked()
 {
+    int choose{};
     int result{};
     SortTableDialog std(this);
 
@@ -187,13 +117,23 @@ void Widget::on_sortTable_clicked()
         return;
     }
 
-    //Код сортировки
+    choose = std.getChoose();
+    if (choose == 0)
+    {
+        ui->tableWidget->sortByColumn(TYPE, Qt::AscendingOrder);
+    }
+    else
+    {
+        ui->tableWidget->sortByColumn(TYPE, Qt::DescendingOrder);
+    }
 }
 
 
 void Widget::on_searchField_clicked()
 {
+    int choose{};
     int result{};
+    QString text{};
     SearchFieldDialog sfd(this);
 
     sfd.setWindowTitle("Поиск по полю");
@@ -205,6 +145,24 @@ void Widget::on_searchField_clicked()
     }
 
     //Код поиска
+    choose = sfd.getChoose();
+    switch (choose)
+    {
+    case 0:
+        //lineEdit
+        break;
+    case 1:
+        //lineEdit
+        break;
+    case 2:
+        //lineEdit
+        break;
+    case 3:
+        //dataEdit
+        break;
+    default:
+        break;
+    }
 }
 
 
@@ -240,3 +198,4 @@ void Widget::on_editField_clicked()
 
     //Код редактирования поля
 }
+

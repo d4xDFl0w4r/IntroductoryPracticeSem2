@@ -15,6 +15,7 @@ SortTableDialog::~SortTableDialog()
 
 void SortTableDialog::on_comboBox_2_activated(int index)
 {
+    _choose = index;
     if (index == 0)
     {
         ui->label_4->setStyleSheet("image: url(:/images/sort_A-Z.png);");
@@ -37,3 +38,7 @@ void SortTableDialog::on_buttonBox_rejected()
     reject();
 }
 
+int SortTableDialog::getChoose() const
+{
+    return _choose;
+}

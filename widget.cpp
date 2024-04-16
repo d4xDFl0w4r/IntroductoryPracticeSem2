@@ -105,6 +105,7 @@ void Widget::on_saveFile_clicked()
 
 void Widget::on_sortTable_clicked()
 {
+    int choose{};
     int result{};
     SortTableDialog std(this);
 
@@ -116,13 +117,24 @@ void Widget::on_sortTable_clicked()
         return;
     }
 
-    //Код сортировки
+    choose = std.getChoose();
+    if (choose == 0)
+    {
+        ui->tableWidget->sortByColumn(TYPE, Qt::AscendingOrder);
+    }
+    else
+    {
+        ui->tableWidget->sortByColumn(TYPE, Qt::DescendingOrder);
+    }
 }
 
 
 void Widget::on_searchField_clicked()
 {
+    int choose{};
     int result{};
+    int column{};
+    QString text{};
     SearchFieldDialog sfd(this);
 
     sfd.setWindowTitle("Поиск по полю");
@@ -134,6 +146,38 @@ void Widget::on_searchField_clicked()
     }
 
     //Код поиска
+    choose = sfd.getChoose();
+    switch (choose)
+    {
+    case 0:
+        //text = sfd.
+        break;
+    case 1:
+        //lineEdit
+        break;
+    case 2:
+        //lineEdit
+        break;
+    case 3:
+        //dataEdit
+        break;
+    default:
+        break;
+    }
+
+    QString type{};
+    QString breed{};
+    QString gender{};
+    QString pet{};
+    QString owner{};
+    QString comment{};
+    QString department{};
+    QString service{};
+    double cost{};
+    QString receipt{};
+    QString discharge{};
+
+    //for
 }
 
 

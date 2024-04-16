@@ -27,7 +27,9 @@ void SearchFieldDialog::on_buttonBox_rejected()
 
 void SearchFieldDialog::on_comboBox_activated(int index)
 {
-    switch (index) {
+    _choose = index;
+    switch (index)
+    {
     case 0:
         ui->lineEdit->setEnabled(true);
         ui->dateEdit->setEnabled(false);
@@ -49,3 +51,7 @@ void SearchFieldDialog::on_comboBox_activated(int index)
     }
 }
 
+int SearchFieldDialog::getChoose() const
+{
+    return _choose;
+}

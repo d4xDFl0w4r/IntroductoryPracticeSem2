@@ -10,10 +10,14 @@ class SearchFieldDialog;
 class SearchFieldDialog : public QDialog
 {
     Q_OBJECT
+    int _choose{};
 
 public:
     explicit SearchFieldDialog(QWidget *parent = nullptr);
     ~SearchFieldDialog();
+
+    int getChoose() const;
+    //QString
 
 private slots:
     void on_buttonBox_accepted();

@@ -10,10 +10,13 @@ class SortTableDialog;
 class SortTableDialog : public QDialog
 {
     Q_OBJECT
+    int _choose{};
 
 public:
     explicit SortTableDialog(QWidget *parent = nullptr);
     ~SortTableDialog();
+
+    int getChoose() const;
 
 private slots:
     void on_comboBox_2_activated(int index);

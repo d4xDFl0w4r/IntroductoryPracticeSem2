@@ -20,6 +20,18 @@ public:
 private slots:
     void on_addRecord_clicked();
 
+    void on_openFile_clicked();
+
+    void on_saveFile_clicked();
+
+    void on_sortTable_clicked();
+
+    void on_searchField_clicked();
+
+    void on_createChart_clicked();
+
+    void on_editField_clicked();
+
 private:
     Ui::Widget *ui;
 

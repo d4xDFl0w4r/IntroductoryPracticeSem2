@@ -24,6 +24,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         addRecordDialog.h addRecordDialog.cpp addRecordDialog.ui
+        sortTableDialog.h sortTableDialog.cpp sortTableDialog.ui
+
+        searchFieldDialog.h searchFieldDialog.cpp searchFieldDialog.ui
+        assets.qrc
+        createChartDialog.h createChartDialog.cpp createChartDialog.ui
+        editFieldDialog.h editFieldDialog.cpp editFieldDialog.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Introductory_practice_veterinary_clinic APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

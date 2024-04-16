@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/img"/>
+    <qresource prefix="/">
+        <file>images/sort_A-Z.png</file>
+        <file>images/sort_Z-A.png</file>
+    </qresource>
+</RCC>

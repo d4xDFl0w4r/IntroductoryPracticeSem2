@@ -1,6 +1,12 @@
 #include "widget.h"
 #include "./ui_widget.h"
 #include "addRecordDialog.h"
+#include "sortTableDialog.h"
+#include "searchFieldDialog.h"
+#include "createChartDialog.h"
+#include "editFieldDialog.h"
+#include <QFileDialog>
+#include <QMessageBox>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -44,7 +50,7 @@ void Widget::on_addRecord_clicked()
     ard.setWindowTitle("Добавление записи пациента");
     result = ard.exec();
 
-    if (result ==QDialog::Rejected)
+    if (result == QDialog::Rejected)
     {
         return;
     }
@@ -74,5 +80,93 @@ void Widget::on_addRecord_clicked()
     ui->tableWidget->setItem(lastRow, COST, new QTableWidgetItem(QString::number(cost)));
     ui->tableWidget->setItem(lastRow, RECEIPT, new QTableWidgetItem(receipt));
     ui->tableWidget->setItem(lastRow, DISCHARGE, new QTableWidgetItem(discharge));
+}
+
+
+void Widget::on_openFile_clicked()
+{
+    QString fileName{};
+
+    fileName = QFileDialog::getOpenFileName(this,
+                       tr("Открыть файл"), "C://", "Все файлы (*.*)");
+    QMessageBox::information(this, tr("Имя файла"), fileName);//Вместо этого код открытия файла
+}
+
+
+void Widget::on_saveFile_clicked()
+{
+    QString fileName{};
+
+    fileName = QFileDialog::getOpenFileName(this,
+                       tr("Сохранить файл"), "C://", "Все файлы (*.*)");
+    QMessageBox::information(this, tr("Имя файла"), fileName);//Вместо этого код сохранения файла
+}
+
+
+void Widget::on_sortTable_clicked()
+{
+    int result{};
+    SortTableDialog std(this);
+
+    std.setWindowTitle("Сортировка таблицы");
+    result = std.exec();
+
+    if (result == QDialog::Rejected)
+    {
+        return;
+    }
+
+    //Код сортировки
+}
+
+
+void Widget::on_searchField_clicked()
+{
+    int result{};
+    SearchFieldDialog sfd(this);
+
+    sfd.setWindowTitle("Поиск по полю");
+    result = sfd.exec();
+
+    if (result == QDialog::Rejected)
+    {
+        return;
+    }
+
+    //Код поиска
+}
+
+
+void Widget::on_createChart_clicked()
+{
+    int result{};
+    CreateChartDialog ccd(this);
+
+    ccd.setWindowTitle("Построение диаграммы");
+    result = ccd.exec();
+
+    if (result == QDialog::Rejected)
+    {
+        return;
+    }
+
+    //Код вывода диаграммы
+}
+
+
+void Widget::on_editField_clicked()
+{
+    int result{};
+    EditFieldDialog efd(this);
+
+    efd.setWindowTitle("Построение диаграммы");
+    result = efd.exec();
+
+    if (result == QDialog::Rejected)
+    {
+        return;
+    }
+
+    //Код редактирования поля
 }
 

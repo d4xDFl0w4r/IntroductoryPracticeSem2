@@ -6,6 +6,12 @@ SearchFieldDialog::SearchFieldDialog(QWidget *parent)
     , ui(new Ui::SearchFieldDialog)
 {
     ui->setupUi(this);
+
+    ui->lineEdit->setVisible(true);
+    ui->label_text->setVisible(true);
+
+    ui->dateEdit->setVisible(false);
+    ui->label_date->setVisible(false);
 }
 
 SearchFieldDialog::~SearchFieldDialog()
@@ -31,20 +37,20 @@ void SearchFieldDialog::on_comboBox_activated(int index)
     switch (index)
     {
     case 0:
-        ui->lineEdit->setEnabled(true);
-        ui->dateEdit->setEnabled(false);
-        break;
     case 1:
-        ui->lineEdit->setEnabled(true);
-        ui->dateEdit->setEnabled(false);
-        break;
     case 2:
-        ui->lineEdit->setEnabled(true);
-        ui->dateEdit->setEnabled(false);
+        ui->lineEdit->setVisible(true);
+        ui->label_text->setVisible(true);
+
+        ui->dateEdit->setVisible(false);
+        ui->label_date->setVisible(false);
         break;
     case 3:
-        ui->lineEdit->setEnabled(false);
-        ui->dateEdit->setEnabled(true);
+        ui->lineEdit->setVisible(false);
+        ui->label_text->setVisible(false);
+
+        ui->dateEdit->setVisible(true);
+        ui->label_date->setVisible(true);
         break;
     default:
         break;

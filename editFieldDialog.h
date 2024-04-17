@@ -2,6 +2,7 @@
 #define EDITFIELDDIALOG_H
 
 #include <QDialog>
+#include <QTableWidget>
 
 namespace Ui {
 class EditFieldDialog;
@@ -12,7 +13,7 @@ class EditFieldDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EditFieldDialog(QWidget *parent = nullptr);
+    explicit EditFieldDialog(QWidget *parent = nullptr, QTableWidget *table = nullptr);
     ~EditFieldDialog();
 
 private slots:

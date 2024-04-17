@@ -14,6 +14,18 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
+    keyCtrlS = new QShortcut(this);
+    keyCtrlS->setKey(Qt::CTRL | Qt::Key_S);
+    connect(keyCtrlS, SIGNAL(activated()), this, SLOT(on_saveFile_clicked()));
+
+    keyCtrlO = new QShortcut(this);
+    keyCtrlO->setKey(Qt::CTRL | Qt::Key_O);
+    connect(keyCtrlO, SIGNAL(activated()), this, SLOT(on_openFile_clicked()));
+
+    keyCtrlN = new QShortcut(this);
+    keyCtrlN->setKey(Qt::CTRL | Qt::Key_N);
+    connect(keyCtrlN, SIGNAL(activated()), this, SLOT(on_addRecord_clicked()));
+
     QStringList title{};
     ui->setupUi(this);
     setWindowTitle("Регистратура ветеринарной клиники");
@@ -109,11 +121,22 @@ void Widget::on_openFile_clicked()
                 "Бинарные файлы (*.bin)"
             );
 
+    if (filename.length() == 0)
+    {
+        return;
+    }
+
     QFile file(filename);
     file.open(QFile::ReadOnly);
-    if (file.NotOpen)
+
+    if (!file.isOpen())
     {
-        QMessageBox::critical(this, tr("Ошибка открытия файла"), ("Файл " + filename.toStdString() + " не удалось открыть").c_str());
+        QMessageBox::critical
+                (
+                    this,
+                    tr("Ошибка открытия файла"),
+                    ("Файл " + filename.toStdString() + " не удалось открыть").c_str()
+                );
         return;
     }
 
@@ -202,6 +225,17 @@ void Widget::on_sortTable_clicked()
 
 void Widget::on_searchField_clicked()
 {
+    if (ui->tableWidget->rowCount() == 0)
+    {
+        QMessageBox::warning
+                (
+                    this,
+                    tr("Предупреждение"),
+                    "Пустая таблица"
+                );
+        return;
+    }
+
     int choose{};
     int result{};
     int column{};
@@ -282,8 +316,19 @@ void Widget::on_createChart_clicked()
 
 void Widget::on_editField_clicked()
 {
+    if (ui->tableWidget->rowCount() == 0)
+    {
+        QMessageBox::warning
+                (
+                    this,
+                    tr("Предупреждение"),
+                    "Пустая таблица"
+                );
+        return;
+    }
+
     int result{};
-    EditFieldDialog efd(this);
+    EditFieldDialog efd(this, ui->tableWidget);
 
     efd.setWindowTitle("Построение диаграммы");
     result = efd.exec();

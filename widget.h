@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QShortcut>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -49,5 +50,9 @@ private:
         RECEIPT,
         DISCHARGE
     };
+
+    QShortcut *keyCtrlS;
+    QShortcut *keyCtrlO;
+    QShortcut *keyCtrlN;
 };
 #endif // WIDGET_H

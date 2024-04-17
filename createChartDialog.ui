@@ -2,74 +2,46 @@
 <ui version="4.0">
  <class>CreateChartDialog</class>
  <widget class="QDialog" name="CreateChartDialog">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>462</width>
-    <height>292</height>
+    <width>644</width>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>240</y>
-     <width>166</width>
-     <height>24</height>
+     <x>560</x>
+     <y>480</y>
+     <width>80</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+    <set>QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QFrame" name="horizontalFrame">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>10</y>
-     <width>228</width>
-     <height>22</height>
+     <x>-1</x>
+     <y>-1</y>
+     <width>641</width>
+     <height>471</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Построение диаграммы</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-   </layout>
+   <layout class="QHBoxLayout" name="horizontalLayout_2"/>
   </widget>
  </widget>
  <resources/>

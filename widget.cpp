@@ -255,8 +255,18 @@ void Widget::on_searchField_clicked()
 
 void Widget::on_createChart_clicked()
 {
+    if (ui->tableWidget->rowCount() == 0)
+    {
+        QMessageBox::warning
+                (
+                    this,
+                    tr("Предупреждение"),
+                    "Пустая таблица"
+                );
+        return;
+    }
     int result{};
-    CreateChartDialog ccd(this);
+    CreateChartDialog ccd(this, ui->tableWidget);
 
     ccd.setWindowTitle("Построение диаграммы");
     result = ccd.exec();

@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setStyle("fusion");
+    a.setStyle("Fusion");
     Widget w;
     w.show();
 

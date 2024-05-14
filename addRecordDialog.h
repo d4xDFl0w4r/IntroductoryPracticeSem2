@@ -34,6 +34,11 @@ private slots:
 
 private:
     Ui::AddRecordDialog *ui;
+
+    void handler_Text_Changed(const QString& text);
+    bool EmptyFields();
+    bool NotRusLetters(const QString& text);
+    bool NotRusFields();
 };
 
 #endif // ADDRECORDDIALOG_H

@@ -16,6 +16,15 @@ public:
     explicit EditFieldDialog(QWidget *parent = nullptr, QTableWidget *table = nullptr);
     ~EditFieldDialog();
 
+    int getIndex();
+    int getChoose();
+    QString getData();
+
+    enum Choose {
+        Text,
+        Date
+    };
+
 private slots:
     void on_buttonBox_accepted();
 
@@ -25,6 +34,10 @@ private slots:
 
 private:
     Ui::EditFieldDialog *ui;
+    int choose;
+
+    void handler_Text_Changed(const QString& text);
+    bool NotRusLetters(const QString &text);
 };
 
 #endif // EDITFIELDDIALOG_H

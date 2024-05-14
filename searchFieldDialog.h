@@ -17,7 +17,8 @@ public:
     ~SearchFieldDialog();
 
     int getChoose() const;
-    //QString
+    QString getEdit() const;
+    QString getDate() const;
 
 private slots:
     void on_buttonBox_accepted();
@@ -28,6 +29,9 @@ private slots:
 
 private:
     Ui::SearchFieldDialog *ui;
+
+    void handler_Text_Changed(const QString& text);
+    bool NotRusLetters(const QString &text);
 };
 
 #endif // SEARCHFIELDDIALOG_H

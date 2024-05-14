@@ -15,6 +15,7 @@ SOURCES += \
     createChartDialog.cpp \
     editFieldDialog.cpp \
     searchFieldDialog.cpp \
+    searchResultDialog.cpp \
     sortTableDialog.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     createChartDialog.h \
     editFieldDialog.h \
     searchFieldDialog.h \
+    searchResultDialog.h \
     sortTableDialog.h
 
 FORMS += \
@@ -31,6 +33,7 @@ FORMS += \
     createChartDialog.ui \
     editFieldDialog.ui \
     searchFieldDialog.ui \
+    searchResultDialog.ui \
     sortTableDialog.ui
 
 RESOURCES += \

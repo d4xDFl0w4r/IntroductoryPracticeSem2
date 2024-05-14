@@ -1,1 +1,0 @@
-g++ -o console.out main.cpp errors/errors.cpp classes/Menu/menu/menu.cpp classes/Menu/menu_item/menuitem.cpp classes/date/date.cpp classes/table_row/tablerow.cpp functions/binary_files/binaryfiles.cpp functions/editing/editing.cpp functions/correct_input/correctinput.cpp functions/others/others.cpp functions/sorting/sorting.cpp functions/search/search.cpp

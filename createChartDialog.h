@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QTableWidget>
+#include <QPieSeries>
 
 namespace Ui {
 class CreateChartDialog;

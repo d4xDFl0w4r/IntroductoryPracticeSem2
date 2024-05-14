@@ -4,12 +4,17 @@
 #include <QtCharts>
 #include <QChartView>
 #include <QPieSeries>
+#include <QPieSlice>
+
+void handle_hovered(QPieSlice* slice, bool state);
+QString label = "";
 
 CreateChartDialog::CreateChartDialog(QWidget *parent, QTableWidget *table)
     : QDialog(parent)
     , ui(new Ui::CreateChartDialog)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->geometry().width(), this->geometry().height());
 
     int departments[9]{};
 
@@ -68,18 +73,34 @@ CreateChartDialog::CreateChartDialog(QWidget *parent, QTableWidget *table)
     if (departments[OPHTALMOLOGY] > 0)
         series->append("Офтальмология", departments[OPHTALMOLOGY]);
     if (departments[BLOOD_ANALYSIS] > 0)
-        series->append("Анализ крови с расшифровкой", departments[BLOOD_ANALYSIS]);
+        series->append("Анализ крови", departments[BLOOD_ANALYSIS]);
     if (departments[VACCINATION] > 0)
         series->append("Вакцинация", departments[VACCINATION]);
     if (departments[CARDIOLOGY] > 0)
         series->append("Кардиология", departments[CARDIOLOGY]);
 
+    series->setHoleSize(0.25);
+
+    QVector<QPieSlice*> slices;
+    for (int i = 0; i < series->slices().count(); i++) {
+        slices.push_back(series->slices().at(i));
+        slices[i]->setLabelVisible(true);
+    }
+
     QChart *chart = new QChart();
+    chart->legend()->hide();
     chart->addSeries(series);
+
+    chart->setAnimationOptions(QChart::SeriesAnimations);
     chart->setTitle("Распределение пациентов по отделениям");
+    chart->setTheme(QChart::ChartThemeQt);
 
     QChartView *chartView = new QChartView(chart);
+    chartView->setFixedSize(this->geometry().width() - 25, this->geometry().height() - 55);
+    chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setParent(ui->horizontalFrame);
+
+    connect(series, &QPieSeries::hovered, this, handle_hovered);
 }
 
 CreateChartDialog::~CreateChartDialog()
@@ -98,3 +119,13 @@ void CreateChartDialog::on_buttonBox_rejected()
     reject();
 }
 
+void handle_hovered(QPieSlice* slice, bool state) {
+    if (state) {
+        slice->setExploded(true);
+        label = slice->label();
+        slice->setLabel(label + ": " + QString::number(round(slice->percentage() * 10000) / 100) + "%");
+    }  else {
+        slice->setExploded(false);
+        slice->setLabel(label);
+    }
+}

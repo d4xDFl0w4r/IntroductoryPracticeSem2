@@ -1,8 +1,9 @@
 #include "widget.h"
-#include "./ui_widget.h"
+#include "ui_widget.h"
 #include "addRecordDialog.h"
 #include "sortTableDialog.h"
 #include "searchFieldDialog.h"
+#include "searchResultDialog.h"
 #include "createChartDialog.h"
 #include "editFieldDialog.h"
 #include <QFile>
@@ -29,6 +30,9 @@ Widget::Widget(QWidget *parent)
     QStringList title{};
     ui->setupUi(this);
     setWindowTitle("Регистратура ветеринарной клиники");
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget->setColumnCount(11);
 
     title << "Вид" << "Порода" << "Пол" << "Кличка"
@@ -46,18 +50,6 @@ Widget::~Widget()
 
 void Widget::on_addRecord_clicked()
 {
-    QString type{};
-    QString breed{};
-    QString gender{};
-    QString pet{};
-    QString owner{};
-    QString comment{};
-    QString department{};
-    QString service{};
-    double cost{};
-    QString receipt{};
-    QString discharge{};
-
     int result{};
     int lastRow{};
     AddRecordDialog ard(this);
@@ -70,17 +62,17 @@ void Widget::on_addRecord_clicked()
         return;
     }
 
-    type = ard.getType();
-    breed = ard.getBreed();
-    gender = ard.getGender();
-    pet = ard.getPet();
-    owner = ard.getOwner();
-    comment = ard.getComment();
-    department = ard.getDepartment();
-    service = ard.getService();
-    cost = ard.getCost();
-    receipt = ard.getReceipt();
-    discharge = ard.getDischarge();
+    QString type = ard.getType();
+    QString breed = ard.getBreed();
+    QString gender = ard.getGender();
+    QString pet = ard.getPet();
+    QString owner = ard.getOwner();
+    QString comment = ard.getComment();
+    QString department = ard.getDepartment();
+    QString service = ard.getService();
+    double cost = ard.getCost();
+    QString receipt = ard.getReceipt();
+    QString discharge = ard.getDischarge();
 
     ui->tableWidget->insertRow(ui->tableWidget->rowCount());
     lastRow = ui->tableWidget->rowCount() - 1;
@@ -173,7 +165,7 @@ void Widget::on_saveFile_clicked()
 {
     QString filename{};
 
-    filename = QFileDialog::getOpenFileName(this,
+    filename = QFileDialog::getSaveFileName(this,
                        tr("Сохранить файл"), "/home/d4xdfl0w4r/Документы/VetClinicData", "Бинарные файлы (*.bin)");
 
     QFile file(filename);
@@ -199,6 +191,26 @@ void Widget::on_saveFile_clicked()
 
 void Widget::on_sortTable_clicked()
 {
+    if (ui->tableWidget->rowCount() == 0)
+    {
+        QMessageBox::warning
+                (
+                    this,
+                    tr("Предупреждение"),
+                    "Пустая таблица"
+                );
+        return;
+    } else if (ui->tableWidget->rowCount() == 1)
+    {
+        QMessageBox::warning
+                (
+                    this,
+                    tr("Предупреждение"),
+                    "В таблице 1 элемент"
+                );
+        return;
+    }
+
     int choose{};
     int result{};
     SortTableDialog std(this);
@@ -228,10 +240,10 @@ void Widget::on_searchField_clicked()
     if (ui->tableWidget->rowCount() == 0)
     {
         QMessageBox::warning
-                (
-                    this,
-                    tr("Предупреждение"),
-                    "Пустая таблица"
+            (
+                this,
+                tr("Предупреждение"),
+                "Пустая таблица"
                 );
         return;
     }
@@ -250,40 +262,62 @@ void Widget::on_searchField_clicked()
         return;
     }
 
-    //Код поиска
     choose = sfd.getChoose();
     switch (choose)
     {
     case 0:
-        //text = sfd.
-        //lineEdit
+        column = TYPE;
+        text = sfd.getEdit();
         break;
     case 1:
-        //lineEdit
+        column = OWNER;
+        text = sfd.getEdit();
         break;
     case 2:
-        //lineEdit
+        column = SERVICE;
+        text = sfd.getEdit();
         break;
     case 3:
-        //dataEdit
+        column = RECEIPT;
+        text = sfd.getDate();
         break;
     default:
         break;
     }
 
-    QString type{};
-    QString breed{};
-    QString gender{};
-    QString pet{};
-    QString owner{};
-    QString comment{};
-    QString department{};
-    QString service{};
-    double cost{};
-    QString receipt{};
-    QString discharge{};
+    QStringList searchData;
 
-    //for
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        if (ui->tableWidget->item(row, column)->text() == text)
+        {
+            for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
+                searchData.append(ui->tableWidget->item(row, col)->text());
+            }
+        }
+    }
+
+    if (searchData.isEmpty())
+    {
+        QMessageBox::information
+            (
+                this,
+                tr("Результат поиска"),
+                "Ничего не найдено"
+                );
+        return;
+    }
+    else
+    {
+        SearchResultDialog srd(this);
+        srd.setWindowTitle("Результат поиска");
+        srd.setSearchData(searchData, ui->tableWidget->columnCount());
+        result = srd.exec();
+
+        if (result == QDialog::Rejected)
+        {
+            return;
+        }
+    }
 }
 
 
@@ -309,8 +343,6 @@ void Widget::on_createChart_clicked()
     {
         return;
     }
-
-    //Код вывода диаграммы
 }
 
 
@@ -330,7 +362,7 @@ void Widget::on_editField_clicked()
     int result{};
     EditFieldDialog efd(this, ui->tableWidget);
 
-    efd.setWindowTitle("Построение диаграммы");
+    efd.setWindowTitle("Изменение записи");
     result = efd.exec();
 
     if (result == QDialog::Rejected)
@@ -338,5 +370,11 @@ void Widget::on_editField_clicked()
         return;
     }
 
-    //Код редактирования поля
+    int column;
+    if (efd.getChoose() == EditFieldDialog::Date) {
+        column = DISCHARGE;
+    } else {
+        column = COMMENT;
+    }
+    ui->tableWidget->setItem(efd.getIndex(), column, new QTableWidgetItem(efd.getData()));
 }

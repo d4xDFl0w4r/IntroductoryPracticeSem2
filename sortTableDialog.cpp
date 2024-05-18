@@ -6,6 +6,7 @@ SortTableDialog::SortTableDialog(QWidget *parent)
     , ui(new Ui::SortTableDialog)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->geometry().width(), this->geometry().height());
 }
 
 SortTableDialog::~SortTableDialog()

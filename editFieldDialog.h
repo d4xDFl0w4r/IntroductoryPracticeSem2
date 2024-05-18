@@ -21,8 +21,13 @@ public:
     QString getData();
 
     enum Choose {
-        Text,
-        Date
+        TEXT,
+        DATE
+    };
+
+    enum Column {
+	    COMMENT = 5,
+	    DISCHARGE = 10
     };
 
 private slots:
@@ -34,9 +39,11 @@ private slots:
 
 private:
     Ui::EditFieldDialog *ui;
+    QTableWidget *table;
     int choose;
 
-    void handler_Text_Changed(const QString& text);
+    void handler_IndexChanged(const int& index);
+    void handler_TextChanged(const QString& text);
     bool NotRusLetters(const QString &text);
 };
 

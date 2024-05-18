@@ -51,7 +51,14 @@ void SearchFieldDialog::on_comboBox_activated(int index)
         ui->dateEdit->setVisible(false);
         ui->label_date->setVisible(false);
 
-        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+        if (ui->lineEdit->text().length() == 0 || NotRusLetters(ui->lineEdit->text()))
+        {
+            ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+        }
+        else
+        {
+            ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+        }
         break;
     case 3:
         ui->lineEdit->setVisible(false);
@@ -79,7 +86,7 @@ QString SearchFieldDialog::getEdit() const
 
 QString SearchFieldDialog::getDate() const
 {
-    return ui->dateEdit->date().toString();
+    return ui->dateEdit->date().toString("dd.MM.yyyy");
 }
 
 void SearchFieldDialog::handler_Text_Changed(const QString& text)

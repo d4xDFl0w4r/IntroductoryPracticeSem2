@@ -371,7 +371,7 @@ void Widget::on_editField_clicked()
     }
 
     int column;
-    if (efd.getChoose() == EditFieldDialog::Date) {
+    if (efd.getChoose() == EditFieldDialog::DATE) {
         column = DISCHARGE;
     } else {
         column = COMMENT;

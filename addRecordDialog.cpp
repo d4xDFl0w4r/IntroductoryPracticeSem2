@@ -9,7 +9,6 @@ AddRecordDialog::AddRecordDialog(QWidget *parent)
     ui->setupUi(this);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     ui->receipt->setMaximumDate(QDate::currentDate());
-    ui->discharge->setMaximumDate(QDate::currentDate());
 
     connect(ui->type, &QLineEdit::textChanged, this, &AddRecordDialog::handler_Text_Changed);
     connect(ui->breed, &QLineEdit::textChanged, this, &AddRecordDialog::handler_Text_Changed);

@@ -167,6 +167,9 @@ void Widget::on_saveFile_clicked()
 
     filename = QFileDialog::getSaveFileName(this,
                        tr("Сохранить файл"), "/home/d4xdfl0w4r/Документы/VetClinicData", "Бинарные файлы (*.bin)");
+    if (!filename.endsWith(".bin")) {
+        filename.append(".bin");
+    }
 
     QFile file(filename);
     file.open(QFile::WriteOnly);

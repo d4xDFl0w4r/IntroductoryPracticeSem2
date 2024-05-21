@@ -53,7 +53,7 @@ CreateChartDialog::CreateChartDialog(QWidget *parent, QTableWidget *table)
         {
             departments[VACCINATION]++;
         }
-        else if (department == "Кардиология")
+        else if (department == "Кардиология и ЭКГ")
         {
             departments[CARDIOLOGY]++;
         }
